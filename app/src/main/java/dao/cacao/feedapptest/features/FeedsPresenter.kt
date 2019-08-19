@@ -16,7 +16,7 @@ class FeedsPresenter @Inject constructor() : BasePresenter<View>(), Presenter {
             .doOnError { view.showErrorMessage(it) }
             .onErrorResumeNext(feedsManager.getCashedPosts())
             .doOnSubscribe { view.showLoading() }
-            .map { it.sortedBy { it.created } }
+            .map { it.sortedByDescending { it.created } }
             .subscribe(view::showFeeds)
             .autoDispose()
     }

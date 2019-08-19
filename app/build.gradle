@@ -18,10 +18,10 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "Integer", 'PORT', "50051"
-        buildConfigField "String", 'HOST', "\"app.dev.onesvc.one\""
+        buildConfigField "Integer", 'PORT', "50052"
+        buildConfigField "String", 'HOST', "\"arm.actant.app\""
         buildConfigField "String", 'SCHEME', "\"http://\""
-        buildConfigField "String", 'TOKEN', "\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNiwiaWF0IjoxNTY0NzMwMzExLCJleHAiOjE1OTU4MzQzMTF9.ppP_Nvvz9TSeQtmr5EtATJAjfQXuIsfiM4NkyLmR3_g\""
+        buildConfigField "String", 'TOKEN', "\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJpYXQiOjE1NjUyNTY5OTksImV4cCI6MTU5NjM2MDk5OX0.GoY-MBC_8hfuWHGVLP6bMNp-_ODSvq3pOgGNgAAVWPQ\""
     }
     buildTypes {
         release {

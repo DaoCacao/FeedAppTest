@@ -53,8 +53,9 @@ message LoadWorldReply {
 
 
 message WorldmapSession {
-    string ios_worldmap_url = 1;
-    repeated social.Post posts = 2;
+    string session_id = 1;
+    string ios_worldmap_url = 2;
+    repeated social.Post posts = 3;
 }
 
 
@@ -111,19 +112,8 @@ message SaveVideoRequest {
 //}
 
 
-message ActiveQuest {
-    string quest_id = 1;
-    repeated social.PostCompositeID post_ids = 2;
-}
-
-message FoundPost {
-    string quest_id = 1;
-    string username = 2;
-    social.PostCompositeID found_post_id = 3;
-}
-
 message SetLocationWorldMapRequest {
-    string id = 1;
+    string session_id = 1;
     string ios_worldmap_url = 2;
     base_types.GpsCoordinates coordinates = 3;
 }
@@ -169,10 +159,3 @@ service TelemetryService {
     rpc GetActiveSessions (BaseRequest) returns (GetActiveSessionsReply) {};
     rpc SaveTelemetryVideo (SaveVideoRequest) returns (BaseReply) {};
 }
-
-
-service QuestService {
-    rpc GetActiveQuest (base_types.GpsCoordinates) returns (ActiveQuest) {};
-    rpc PostFound (FoundPost) returns (BaseReply) {};
-}
-

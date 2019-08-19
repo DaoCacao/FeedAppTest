@@ -24,7 +24,7 @@ message PostCompositeID {
 // Потом могут превратиться в 3d-модели со скриптами анимаций, шейдерами и т.п.
 message ARPoster {
 	repeated string layout_images_urls = 1;
-	string object_3d_url = 2;
+	base_types.Model3d model = 2;
 }
 
 // Poster от ARPoster будет отличаться тем, что первый будет оставаться картинкой для соцсети, второй будет объектом
@@ -128,8 +128,7 @@ message CreatePostRequest {
 	uint32 scale_variant = 17; // 1, 2, 3 or 4, where 1 - xs, 4 - xl
 	bool is_quest_post = 18;
 
-	string associated_worldmap_id = 19;
-
+	// string associated_worldmap_id = 19;
     
 }
 
@@ -218,11 +217,28 @@ message RRequest {
     uint32 radius = 2; //in meters
 }
 
+enum ReportPostTypeEnum {
+	inappropriate = 0;
+    spam = 1;
+    other = 2;
+}
 
 message ReportPostRequest {
 	PostCompositeID cpost_id = 1;
+	ReportPostTypeEnum r_type = 2;
+    string comment = 3;
 }
 
+enum ModeratePostTypeEnum {
+	not_seen = 0;
+    approved = 1;
+    rejected = 2;
+}
+
+message ModeratePostRequest {
+	PostCompositeID cpost_id = 1;
+	ReportPostTypeEnum p_type = 2;
+}
 
 service ARMSocialService {
 
@@ -232,6 +248,7 @@ service ARMSocialService {
     rpc GetFeedPostIds (SBaseRequest) returns (PostIdList);
 
     rpc ReportPost (ReportPostRequest) returns (SBaseReply);
+	rpc ModeratePost (ModeratePostRequest) returns (SBaseReply);
 
 	rpc GetPrivateFeedPostIds (SBaseRequest) returns (PostIdList);
 	rpc GetGeneralFeedPostIds (SBaseRequest) returns (PostIdList);

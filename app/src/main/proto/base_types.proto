@@ -140,6 +140,21 @@ message ARSessionFrame {
     repeated Anchor anchors = 2;
 }
 
+
+message KeyPoint {
+    VectorFloat2 pos = 1;
+    float radius = 2;
+    float orientation = 3;
+    float response = 4;
+}
+
+
+message OrbFeaturePoint {
+    KeyPoint key_point = 1;
+    bytes orb_descriptor = 2;
+}
+
+
 message DataFrame {
     ARSessionFrame ar_session_frame = 1; // without centre and size
     double timestamp = 2; //deprecated
@@ -150,6 +165,8 @@ message DataFrame {
     double server_ts = 6;
 
     uint32 frame_index = 7;
+
+    repeated OrbFeaturePoint orb_feature_points = 8;
 
 }
 
@@ -212,6 +229,15 @@ message Video {
     map<string, string> thumbnails = 5; // key is x/y-size like `1920x1080` or `128x128`, value is thumb url
 }
 
+
+message Model3d {
+    string id = 1;
+    string url = 2;
+    string name = 3;
+    string preview_url = 4;
+    double upload_ts = 5;
+    string category_name = 6;
+}
 
 
 message HealthCheckRequest {
