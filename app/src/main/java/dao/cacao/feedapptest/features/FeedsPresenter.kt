@@ -11,12 +11,13 @@ class FeedsPresenter @Inject constructor() : BasePresenter<View>(), Presenter {
     @Inject lateinit var feedsManager: FeedsManager
 
     override fun onViewInit() {
-        feedsManager.getPosts()
+        feedsManager.loadPosts()
             .scheduleIo()
+            .doOnError { view.showErrorMessage(it) }
+            .onErrorResumeNext(feedsManager.getCashedPosts())
             .doOnSubscribe { view.showLoading() }
-            .subscribe(
-                { view.showFeeds(it) },
-                { view.showNoInternetConnection() })
+            .map { it.sortedBy { it.created } }
+            .subscribe(view::showFeeds)
             .autoDispose()
     }
 

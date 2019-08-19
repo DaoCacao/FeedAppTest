@@ -18,9 +18,10 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", 'S3_PORT', "\":8971\""
-        buildConfigField "String", 'SERVER_URL', "\"app.dev.onesvc.one\""
+        buildConfigField "Integer", 'PORT', "50051"
+        buildConfigField "String", 'HOST', "\"app.dev.onesvc.one\""
         buildConfigField "String", 'SCHEME', "\"http://\""
+        buildConfigField "String", 'TOKEN', "\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxNiwiaWF0IjoxNTY0NzMwMzExLCJleHAiOjE1OTU4MzQzMTF9.ppP_Nvvz9TSeQtmr5EtATJAjfQXuIsfiM4NkyLmR3_g\""
     }
     buildTypes {
         release {
@@ -31,9 +32,9 @@ android {
 }
 
 protobuf {
-    protoc { artifact = 'com.google.protobuf:protoc:3.6.1' }
+    protoc { artifact = "com.google.protobuf:protoc:$protobuf_version" }
     plugins {
-        javalite { artifact = "com.google.protobuf:protoc-gen-javalite:3.0.0" }
+        javalite { artifact = "com.google.protobuf:protoc-gen-javalite:$protobuf_version" }
         grpc { artifact = "io.grpc:protoc-gen-grpc-java:$grpc_version" }
     }
     generateProtoTasks {
@@ -50,7 +51,7 @@ protobuf {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -62,6 +63,8 @@ dependencies {
 
     implementation "io.grpc:grpc-okhttp:$grpc_version"
     implementation "io.grpc:grpc-protobuf-lite:$grpc_version"
+    implementation "io.grpc:grpc-stub:$grpc_version"
+    compileOnly "javax.annotation:javax.annotation-api:1.2"
 
     implementation 'com.amazonaws:aws-android-sdk-s3:2.12.5'
     implementation 'com.squareup.okhttp3:okhttp:3.12.0'

@@ -37,9 +37,7 @@ class FeedsActivity : BaseActivity<Presenter>(), View {
         adapter.list = feeds
     }
 
-    override fun showNoInternetConnection() = showToast("No internet connection")
+    override fun showErrorMessage(it: Throwable) = showToast(it.localizedMessage)
 
-    override fun showFeed(feed: Feed) {
-        showToast(feed.toString())
-    }
+    override fun showFeed(feed: Feed) = showToast(feed.toString())
 }

@@ -4,5 +4,6 @@ import dao.cacao.feedapptest.model.entities.Feed
 import io.reactivex.Single
 
 interface FeedsManager {
-    fun getPosts(): Single<List<Feed>>
+    fun loadPosts(): Single<List<Feed>>
+    fun getCashedPosts(): Single<List<Feed>>
 }

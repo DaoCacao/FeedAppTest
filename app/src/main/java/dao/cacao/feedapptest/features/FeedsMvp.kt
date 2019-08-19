@@ -8,7 +8,7 @@ import dao.cacao.feedapptest.model.entities.Feed
 interface View : MvpView {
     fun showLoading()
     fun showFeeds(feeds: List<Feed>)
-    fun showNoInternetConnection()
+    fun showErrorMessage(it: Throwable)
 
     fun showFeed(feed: Feed)
 }
